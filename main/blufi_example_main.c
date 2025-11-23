@@ -24,15 +24,10 @@
 #include "esp_event.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
-#include "esp_netif.h"
-#include "lwip/ip4_addr.h"
-#if CONFIG_BT_CONTROLLER_ENABLED || !CONFIG_BT_NIMBLE_ENABLED
 #include "esp_bt.h"
-#endif
 
 #include "esp_blufi_api.h"
 #include "blufi_example.h"
-#include "blufi_display.h"
 
 #include "esp_blufi.h"
 
@@ -123,7 +118,6 @@ static void ip_event_handler(void* arg, esp_event_base_t event_base,
     switch (event_id) {
     case IP_EVENT_STA_GOT_IP: {
         esp_blufi_extra_info_t info;
-        ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
 
         xEventGroupSetBits(wifi_event_group, CONNECTED_BIT);
         esp_wifi_get_mode(&mode);
@@ -134,15 +128,6 @@ static void ip_event_handler(void* arg, esp_event_base_t event_base,
         info.sta_ssid = gl_sta_ssid;
         info.sta_ssid_len = gl_sta_ssid_len;
         gl_sta_got_ip = true;
-        
-#ifdef CONFIG_BLUFI_DISPLAY_ENABLE
-        {
-            char ip_str[16];
-            snprintf(ip_str, sizeof(ip_str), IPSTR, IP2STR(&event->ip_info.ip));
-            blufi_display_update_wifi_status((const char*)gl_sta_ssid, true, ip_str);
-        }
-#endif
-        
         if (ble_is_connected == true) {
             esp_blufi_send_wifi_conn_report(mode, ESP_BLUFI_STA_CONN_SUCCESS, softap_get_current_connection_number(), &info);
         } else {
@@ -303,16 +288,7 @@ static void example_event_callback(esp_blufi_cb_event_t event, esp_blufi_cb_para
     switch (event) {
     case ESP_BLUFI_EVENT_INIT_FINISH:
         BLUFI_INFO("BLUFI init finish\n");
-#ifdef CONFIG_BLUFI_DISPLAY_ENABLE
-#ifdef CONFIG_BT_BLUEDROID_ENABLED
-        {
-            const uint8_t* bd_addr = esp_bt_dev_get_address();
-            if (bd_addr) {
-                blufi_display_show_info(bd_addr, esp_blufi_get_version(), "Ready");
-            }
-        }
-#endif
-#endif
+
         esp_blufi_adv_start();
         break;
     case ESP_BLUFI_EVENT_DEINIT_FINISH:
@@ -321,30 +297,12 @@ static void example_event_callback(esp_blufi_cb_event_t event, esp_blufi_cb_para
     case ESP_BLUFI_EVENT_BLE_CONNECT:
         BLUFI_INFO("BLUFI ble connect\n");
         ble_is_connected = true;
-#ifdef CONFIG_BLUFI_DISPLAY_ENABLE
-        blufi_display_update_ble_status(true, param->connect.remote_bda);
-        {
-            const uint8_t* bd_addr = esp_bt_dev_get_address();
-            if (bd_addr) {
-                blufi_display_show_info(bd_addr, esp_blufi_get_version(), "Connected");
-            }
-        }
-#endif
         esp_blufi_adv_stop();
         blufi_security_init();
         break;
     case ESP_BLUFI_EVENT_BLE_DISCONNECT:
         BLUFI_INFO("BLUFI ble disconnect\n");
         ble_is_connected = false;
-#ifdef CONFIG_BLUFI_DISPLAY_ENABLE
-        blufi_display_update_ble_status(false, NULL);
-        {
-            const uint8_t* bd_addr = esp_bt_dev_get_address();
-            if (bd_addr) {
-                blufi_display_show_info(bd_addr, esp_blufi_get_version(), "Waiting...");
-            }
-        }
-#endif
         blufi_security_deinit();
         esp_blufi_adv_start();
         break;
@@ -504,43 +462,19 @@ void app_main(void)
     }
     ESP_ERROR_CHECK( ret );
 
-    // Initialize TFT Display (nếu được enable)
-#ifdef CONFIG_BLUFI_DISPLAY_ENABLE
-    ret = blufi_display_init();
-    if (ret == ESP_OK) {
-        blufi_display_clear(COLOR_BLACK);
-        blufi_display_show_info(NULL, 0, "Initializing...");
-        BLUFI_INFO("TFT Display initialized");
-    } else {
-        BLUFI_ERROR("TFT Display initialization failed");
-    }
-#endif
-
     initialise_wifi();
 
-#if CONFIG_BT_CONTROLLER_ENABLED || !CONFIG_BT_NIMBLE_ENABLED
     ret = esp_blufi_controller_init();
     if (ret) {
         BLUFI_ERROR("%s BLUFI controller init failed: %s\n", __func__, esp_err_to_name(ret));
         return;
     }
-#endif
 
     ret = esp_blufi_host_and_cb_init(&example_callbacks);
     if (ret) {
         BLUFI_ERROR("%s initialise failed: %s\n", __func__, esp_err_to_name(ret));
         return;
     }
-
-    // Hiển thị thông tin BLUFI lên màn hình
-#ifdef CONFIG_BLUFI_DISPLAY_ENABLE
-#ifdef CONFIG_BT_BLUEDROID_ENABLED
-    const uint8_t* bd_addr = esp_bt_dev_get_address();
-    if (bd_addr) {
-        blufi_display_show_info(bd_addr, esp_blufi_get_version(), "Ready");
-    }
-#endif
-#endif
 
     BLUFI_INFO("BLUFI VERSION %04x\n", esp_blufi_get_version());
 }

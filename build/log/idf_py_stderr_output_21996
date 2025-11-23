@@ -1,0 +1,150 @@
+[0;33m--- WARNING: GDB cannot open serial ports accessed as COMx[0m
+[0;33m--- Using \\.\COM8 instead...[0m
+[0;33m--- idf_monitor on \\.\COM8 115200 ---[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x40081340: call_start_cpu1 at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/port/cpu_start.c:147
+[0m
+[0;33m0x40081f8a: panic_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/panic.c:425
+[0m
+[0;33m0x4008fba1: esp_system_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/esp_system.c:153
+[0m
+[0;33m0x40096699: __assert_func at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/assert.c:78
+[0m
+[0;33m0x40082377: heap_caps_free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/heap/heap_caps.c:373 (discriminator 1)
+[0m
+[0;33m0x400966c9: free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/heap.c:39
+[0m
+[0;33m0x400d970d: blufi_security_deinit at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_security.c:215
+[0m
+[0;33m0x400d8aea: example_event_callback at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_example_main.c:306 (discriminator 13)
+[0m
+[0;33m0x400db32d: btc_blufi_cb_to_app at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:41
+ (inlined by) btc_blufi_cb_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:595
+[0m
+[0;33m0x400da4eb: btc_thread_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/core/btc_task.c:207
+[0m
+[0;33m0x400dbe9a: osi_thread_run at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/osi/thread.c:165 (discriminator 1)
+[0m
+[0;33m0x4008fbb1: vPortTaskWrapper at D:/Espressif/frameworks/esp-idf-v5.0.7/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:149
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x40081340: call_start_cpu1 at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/port/cpu_start.c:147
+[0m
+[0;33m0x40081f8a: panic_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/panic.c:425
+[0m
+[0;33m0x4008fba1: esp_system_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/esp_system.c:153
+[0m
+[0;33m0x40096699: __assert_func at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/assert.c:78
+[0m
+[0;33m0x40082377: heap_caps_free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/heap/heap_caps.c:373 (discriminator 1)
+[0m
+[0;33m0x400966c9: free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/heap.c:39
+[0m
+[0;33m0x400d970d: blufi_security_deinit at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_security.c:215
+[0m
+[0;33m0x400d8aea: example_event_callback at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_example_main.c:306 (discriminator 13)
+[0m
+[0;33m0x400db32d: btc_blufi_cb_to_app at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:41
+ (inlined by) btc_blufi_cb_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:595
+[0m
+[0;33m0x400da4eb: btc_thread_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/core/btc_task.c:207
+[0m
+[0;33m0x400dbe9a: osi_thread_run at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/osi/thread.c:165 (discriminator 1)
+[0m
+[0;33m0x4008fbb1: vPortTaskWrapper at D:/Espressif/frameworks/esp-idf-v5.0.7/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:149
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x40081340: call_start_cpu1 at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/port/cpu_start.c:147
+[0m
+[0;33m0x40081f8a: panic_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/panic.c:425
+[0m
+[0;33m0x4008fba1: esp_system_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/esp_system.c:153
+[0m
+[0;33m0x40096699: __assert_func at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/assert.c:78
+[0m
+[0;33m0x40082377: heap_caps_free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/heap/heap_caps.c:373 (discriminator 1)
+[0m
+[0;33m0x400966c9: free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/heap.c:39
+[0m
+[0;33m0x400d970d: blufi_security_deinit at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_security.c:215
+[0m
+[0;33m0x400d8aea: example_event_callback at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_example_main.c:306 (discriminator 13)
+[0m
+[0;33m0x400db32d: btc_blufi_cb_to_app at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:41
+ (inlined by) btc_blufi_cb_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:595
+[0m
+[0;33m0x400da4eb: btc_thread_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/core/btc_task.c:207
+[0m
+[0;33m0x400dbe9a: osi_thread_run at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/osi/thread.c:165 (discriminator 1)
+[0m
+[0;33m0x4008fbb1: vPortTaskWrapper at D:/Espressif/frameworks/esp-idf-v5.0.7/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:149
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x40081340: call_start_cpu1 at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/port/cpu_start.c:147
+[0m
+[0;33mTo exit from IDF monitor please use "Ctrl+]". Alternatively, you can use Ctrl-T Ctrl-X to exit.[0m
+[0;33mTo exit from IDF monitor please use "Ctrl+]". Alternatively, you can use Ctrl-T Ctrl-X to exit.[0m
+[0;33mTo exit from IDF monitor please use "Ctrl+]". Alternatively, you can use Ctrl-T Ctrl-X to exit.[0m
+[0;33mTo exit from IDF monitor please use "Ctrl+]". Alternatively, you can use Ctrl-T Ctrl-X to exit.[0m
+[0;33mTo exit from IDF monitor please use "Ctrl+]". Alternatively, you can use Ctrl-T Ctrl-X to exit.[0m
+[0;33mTo exit from IDF monitor please use "Ctrl+]". Alternatively, you can use Ctrl-T Ctrl-X to exit.[0m
+[0;33m0x40081f8a: panic_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/panic.c:425
+[0m
+[0;33m0x4008fba1: esp_system_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/esp_system.c:153
+[0m
+[0;33m0x40096699: __assert_func at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/assert.c:78
+[0m
+[0;33m0x40082377: heap_caps_free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/heap/heap_caps.c:373 (discriminator 1)
+[0m
+[0;33m0x400966c9: free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/heap.c:39
+[0m
+[0;33m0x400d970d: blufi_security_deinit at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_security.c:215
+[0m
+[0;33m0x400d8aea: example_event_callback at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_example_main.c:306 (discriminator 13)
+[0m
+[0;33m0x400db32d: btc_blufi_cb_to_app at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:41
+ (inlined by) btc_blufi_cb_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:595
+[0m
+[0;33m0x400da4eb: btc_thread_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/core/btc_task.c:207
+[0m
+[0;33m0x400dbe9a: osi_thread_run at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/osi/thread.c:165 (discriminator 1)
+[0m
+[0;33m0x4008fbb1: vPortTaskWrapper at D:/Espressif/frameworks/esp-idf-v5.0.7/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:149
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x40081340: call_start_cpu1 at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/port/cpu_start.c:147
+[0m
+[0;33m0x40081f8a: panic_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/panic.c:425
+[0m
+[0;33m0x4008fba1: esp_system_abort at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/esp_system.c:153
+[0m
+[0;33m0x40096699: __assert_func at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/assert.c:78
+[0m
+[0;33m0x40082377: heap_caps_free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/heap/heap_caps.c:373 (discriminator 1)
+[0m
+[0;33m0x400966c9: free at D:/Espressif/frameworks/esp-idf-v5.0.7/components/newlib/heap.c:39
+[0m
+[0;33m0x400d970d: blufi_security_deinit at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_security.c:215
+[0m
+[0;33m0x400d8aea: example_event_callback at D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/main/blufi_example_main.c:306 (discriminator 13)
+[0m
+[0;33m0x400db32d: btc_blufi_cb_to_app at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:41
+ (inlined by) btc_blufi_cb_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/profile/esp/blufi/blufi_prf.c:595
+[0m
+[0;33m0x400da4eb: btc_thread_handler at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/btc/core/btc_task.c:207
+[0m
+[0;33m0x400dbe9a: osi_thread_run at D:/Espressif/frameworks/esp-idf-v5.0.7/components/bt/common/osi/thread.c:165 (discriminator 1)
+[0m
+[0;33m0x4008fbb1: vPortTaskWrapper at D:/Espressif/frameworks/esp-idf-v5.0.7/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:149
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x40081340: call_start_cpu1 at D:/Espressif/frameworks/esp-idf-v5.0.7/components/esp_system/port/cpu_start.c:147
+[0m
+[0m

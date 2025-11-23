@@ -1,0 +1,4 @@
+
+source D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/build/gdbinit/py_extensions
+source D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/build/gdbinit/symbols
+source D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/build/gdbinit/connect

@@ -1,0 +1,158 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6992
+load:0x40078000,len:15520
+load:0x40080400,len:3864
+entry 0x40080650
+[0;32mI (27) boot: ESP-IDF v5.0.7-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 18:20:49[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v3.1[0m
+[0;32mI (35) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (40) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (44) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (49) boot: Enabling RNG early entropy source...[0m
+[0;32mI (54) boot: Partition Table:[0m
+[0;32mI (58) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (65) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (72) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (80) boot:  2 factory          factory app      00 00 00010000 00177000[0m
+[0;32mI (87) boot: End of partition table[0m
+[0;32mI (91) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=2cfd0h (184272) map[0m
+[0;32mI (167) esp_image: segment 1: paddr=0003cff8 vaddr=3ffbdb60 size=03020h ( 12320) load[0m
+[0;32mI (172) esp_image: segment 2: paddr=00040020 vaddr=400d0020 size=bef8ch (782220) map[0m
+[0;32mI (455) esp_image: segment 3: paddr=000fefb4 vaddr=3ffc0b80 size=0240ch (  9228) load[0m
+[0;32mI (459) esp_image: segment 4: paddr=001013c8 vaddr=40080000 size=1caa4h (117412) load[0m
+[0;32mI (523) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (523) boot: Disabling RNG early entropy source...[0m
+[0;32mI (535) cpu_start: Multicore app[0m
+[0;32mI (535) cpu_start: Pro cpu up.[0m
+[0;32mI (535) cpu_start: Starting app cpu, entry point is 0x40081340[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (553) cpu_start: Pro cpu start user code[0m
+[0;32mI (553) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (553) cpu_start: Application information:[0m
+[0;32mI (558) cpu_start: Project name:     blufi_demo[0m
+[0;32mI (563) cpu_start: App version:      v5.0.7-dirty[0m
+[0;32mI (569) cpu_start: Compile time:     Nov 22 2025 18:20:28[0m
+[0;32mI (575) cpu_start: ELF file SHA256:  34d99af02e313f60...[0m
+[0;32mI (581) cpu_start: ESP-IDF:          v5.0.7-dirty[0m
+[0;32mI (586) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (591) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (596) cpu_start: Chip rev:         v3.1[0m
+[0;32mI (601) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (608) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM[0m
+[0;32mI (614) heap_init: At 3FFB6388 len 00001C78 (7 KiB): DRAM[0m
+[0;32mI (620) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM[0m
+[0;32mI (626) heap_init: At 3FFCA0A0 len 00015F60 (87 KiB): DRAM[0m
+[0;32mI (632) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (638) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (645) heap_init: At 4009CAA4 len 0000355C (13 KiB): IRAM[0m
+[0;32mI (653) spi_flash: detected chip: generic[0m
+[0;32mI (656) spi_flash: flash io: dio[0m
+[0;33mW (660) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (674) app_start: Starting scheduler on CPU0[0m
+[0;32m[0;32mI (678) app_start: Starting scheduler on CPU1[0m
+I (678) main_task: Started on CPU0[0m
+[0;32mI (688) main_task: Calling app_main()[0m
+I (738) wifi:wifi driver task: 3ffce330, prio:23, stack:6656, core=0
+[0;32mI (738) system_api: Base MAC address is not set[0m
+[0;32mI (738) system_api: read default base MAC address from EFUSE[0m
+I (758) wifi:wifi firmware version: 23fdf80
+I (758) wifi:wifi certification version: v7.0
+I (758) wifi:config NVS flash: enabled
+I (758) wifi:config nano formating: disabled
+I (768) wifi:Init data frame dynamic rx buffer num: 32
+I (768) wifi:Init static rx mgmt buffer num: 5
+I (768) wifi:Init management short buffer num: 32
+I (778) wifi:Init dynamic tx buffer num: 32
+I (778) wifi:Init static rx buffer size: 1600
+I (788) wifi:Init static rx buffer num: 10
+I (788) wifi:Init dynamic rx buffer num: 32
+[0;32mI (798) wifi_init: rx ba win: 6[0m
+[0;32mI (798) wifi_init: tcpip mbox: 32[0m
+[0;32mI (798) wifi_init: udp mbox: 6[0m
+[0;32mI (808) wifi_init: tcp mbox: 6[0m
+[0;32mI (808) wifi_init: tcp tx win: 5760[0m
+[0;32mI (808) wifi_init: tcp rx win: 5760[0m
+[0;32mI (818) wifi_init: tcp mss: 1440[0m
+[0;32mI (818) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (828) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (828) phy_init: phy_version 4830,54550f7,Jun 20 2024,14:22:08[0m
+[0;33mW (838) phy_init: failed to load RF calibration data (0xffffffff), falling back to full calibration[0m
+[0;33mW (918) phy_init: saving new calibration data because of checksum failure, mode(2)[0m
+I (998) wifi:mode : sta (ec:e3:34:1a:f0:98)
+I (998) wifi:enable tsf
+[0;32mI (998) BTDM_INIT: BT controller compile version [565cb88][0m
+[0;32mI (1008) BTDM_INIT: Bluetooth MAC: ec:e3:34:1a:f0:9a[0m
+[0;32mI (1308) BLUFI_EXAMPLE: BD ADDR: ec:e3:34:1a:f0:9a
+[0m
+[0;32mI (1308) BLUFI_EXAMPLE: BLUFI init finish
+[0m
+[0;32mI (1308) BLUFI_EXAMPLE: BLUFI VERSION 0103
+[0m
+[0;32mI (1308) main_task: Returned from app_main()[0m
+I (5708) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy
+
+[0;32mI (5708) BLUFI_EXAMPLE: BLUFI WiFi starts reconnection
+[0m
+I (10538) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy
+
+[0;32mI (10538) BLUFI_EXAMPLE: BLUFI WiFi starts reconnection
+[0m
+I (15358) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy
+
+[0;32mI (144958) BLUFI_EXAMPLE: BLUFI ble connect
+[0m
+[0;32mI (156358) BLUFI_EXAMPLE: BLUFI Set WIFI opmode 1
+[0m
+[0;32mI (156478) BLUFI_EXAMPLE: Recv STA SSID MosinNagant
+[0m
+[0;32mI (156538) BLUFI_EXAMPLE: Recv STA PASSWORD 123456
+[0m
+[0;32mI (156568) BLUFI_EXAMPLE: BLUFI requset wifi connect to AP
+[0m
+I (159298) wifi:new:<11,0>, old:<1,0>, ap:<255,255>, sta:<11,0>, prof:1
+I (159298) wifi:state: init -> auth (b0)
+I (160298) wifi:state: auth -> init (200)
+I (160318) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy
+
+I (160318) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1
+[0;32mI (160318) BLUFI_EXAMPLE: BLUFI WiFi starts reconnection
+[0m
+I (165148) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy
+
+[0;32mI (165148) BLUFI_EXAMPLE: BLUFI WiFi starts reconnection
+[0m
+I (165218) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1
+I (165218) wifi:state: init -> auth (b0)
+I (165228) wifi:state: auth -> assoc (0)
+I (165238) wifi:state: assoc -> run (10)
+I (167788) wifi:state: run -> init (f00)
+I (167808) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy
+
+I (167808) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1
+[0;32mI (181978) BLUFI_EXAMPLE: BLUFI Set WIFI opmode 1
+[0m
+[0;32mI (182038) BLUFI_EXAMPLE: Recv STA SSID MosinNagant
+[0m
+W (182128) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2
+[0;32mI (182188) BLUFI_EXAMPLE: Recv STA PASSWORD 12345678
+[0m
+[0;32mI (182188) BLUFI_EXAMPLE: BLUFI requset wifi connect to AP
+[0m
+I (182478) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1
+I (182478) wifi:state: init -> auth (b0)
+I (182488) wifi:state: auth -> assoc (0)
+I (182488) wifi:state: assoc -> run (10)
+I (182528) wifi:connected with MosinNagant, aid = 3, channel 11, BW20, bssid = ca:5e:a9:51:72:32
+I (182528) wifi:security: WPA2-PSK, phy: bgn, rssi: -7
+I (182558) wifi:pm start, type: 1
+
+I (182558) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (182618) wifi:AP's beacon interval = 102400 us, DTIM period = 3
+[0;32mI (183558) esp_netif_handlers: sta ip: 192.168.137.105, mask: 255.255.255.0, gw: 192.168.137.1[0m

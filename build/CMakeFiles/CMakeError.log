@@ -1,0 +1,83 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Espressif/tools/ninja/1.10.2/ninja.exe cmTC_c77ea && [1/2] Building C object CMakeFiles/cmTC_c77ea.dir/src.c.obj
+[2/2] Linking C executable cmTC_c77ea
+FAILED: cmTC_c77ea 
+cmd.exe /C "cd . && D:\Espressif\tools\xtensa-esp32-elf\esp-2022r1-11.2.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe -mlongcalls -Wno-frame-address  CMakeFiles/cmTC_c77ea.dir/src.c.obj -o cmTC_c77ea   && cd ."
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: CMakeFiles/cmTC_c77ea.dir/src.c.obj:(.literal+0x4): undefined reference to `pthread_create'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: CMakeFiles/cmTC_c77ea.dir/src.c.obj:(.literal+0x8): undefined reference to `pthread_detach'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: CMakeFiles/cmTC_c77ea.dir/src.c.obj:(.literal+0xc): undefined reference to `pthread_cancel'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: CMakeFiles/cmTC_c77ea.dir/src.c.obj:(.literal+0x10): undefined reference to `pthread_join'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: CMakeFiles/cmTC_c77ea.dir/src.c.obj:(.literal+0x14): undefined reference to `pthread_atfork'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: CMakeFiles/cmTC_c77ea.dir/src.c.obj:(.literal+0x18): undefined reference to `pthread_exit'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: CMakeFiles/cmTC_c77ea.dir/src.c.obj: in function `main':
+src.c:(.text+0x1c): undefined reference to `pthread_create'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: src.c:(.text+0x26): undefined reference to `pthread_detach'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: src.c:(.text+0x30): undefined reference to `pthread_cancel'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: src.c:(.text+0x3c): undefined reference to `pthread_join'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: src.c:(.text+0x48): undefined reference to `pthread_atfork'
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: src.c:(.text+0x50): undefined reference to `pthread_exit'
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Espressif/tools/ninja/1.10.2/ninja.exe cmTC_92823 && [1/2] Building C object CMakeFiles/cmTC_92823.dir/CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_92823
+FAILED: cmTC_92823 
+cmd.exe /C "cd . && D:\Espressif\tools\xtensa-esp32-elf\esp-2022r1-11.2.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe -mlongcalls -Wno-frame-address  -DCHECK_FUNCTION_EXISTS=pthread_create  CMakeFiles/cmTC_92823.dir/CheckFunctionExists.c.obj -o cmTC_92823  -lpthreads && cd ."
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: cannot find -lpthreads
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.
+
+
+
+Determining if the function pthread_create exists in the pthread failed with the following output:
+Change Dir: D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Espressif/tools/ninja/1.10.2/ninja.exe cmTC_e0d25 && [1/2] Building C object CMakeFiles/cmTC_e0d25.dir/CheckFunctionExists.c.obj
+[2/2] Linking C executable cmTC_e0d25
+FAILED: cmTC_e0d25 
+cmd.exe /C "cd . && D:\Espressif\tools\xtensa-esp32-elf\esp-2022r1-11.2.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe -mlongcalls -Wno-frame-address  -DCHECK_FUNCTION_EXISTS=pthread_create  CMakeFiles/cmTC_e0d25.dir/CheckFunctionExists.c.obj -o cmTC_e0d25  -lpthread && cd ."
+d:/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: cannot find -lpthread
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.
+
+
+
+Determining if compiler accepts -pthread failed with the following output:
+Change Dir: D:/Espressif/frameworks/esp-idf-v5.0.7/examples/bluetooth/blufi/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):D:/Espressif/tools/ninja/1.10.2/ninja.exe cmTC_e3df8 && [1/2] Building C object CMakeFiles/cmTC_e3df8.dir/CheckForPthreads.c.obj
+[2/2] Linking C executable cmTC_e3df8
+FAILED: cmTC_e3df8 
+cmd.exe /C "cd . && D:\Espressif\tools\xtensa-esp32-elf\esp-2022r1-11.2.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe -mlongcalls -Wno-frame-address  CMakeFiles/cmTC_e3df8.dir/CheckForPthreads.c.obj -o cmTC_e3df8  -pthread && cd ."
+xtensa-esp32-elf-gcc.exe: error: unrecognized command-line option '-pthread'
+ninja: build stopped: subcommand failed.
+
+
+

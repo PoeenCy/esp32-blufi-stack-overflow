@@ -1,5 +1,3 @@
-
-
 # ESP32 BLUFI - Lỗ Hổng DH Buffer Overflow (V3L)
 
 ## 📖 Mô tả
@@ -45,6 +43,7 @@ esp32-blufi-dh-overflow/
 File này xử lý Diffie-Hellman key exchange trong quá trình bảo mật BLUFI:
 
 - **Chức năng chính:**
+
   - Khởi tạo và quản lý cấu trúc bảo mật (`blufi_security`)
   - Xử lý tham số DH từ client (`blufi_dh_negotiate_data_handler`)
   - Mã hóa/giải mã AES (`blufi_aes_encrypt`, `blufi_aes_decrypt`)
@@ -92,6 +91,7 @@ case SEC_TYPE_DH_PARAM_LEN:
 ```
 
 **Vấn đề:**
+
 - `dh_param_len` được đọc trực tiếp từ `data[1]` và `data[2]` (2 bytes = 0-65535)
 - Không có validation để kiểm tra giá trị hợp lệ (0 < dh_param_len < MAX_VALUE)
 - Có thể gây `malloc()` với size cực lớn → **Memory Exhaustion** → DoS
@@ -107,6 +107,7 @@ case SEC_TYPE_DH_PARAM_DATA:{
 ```
 
 **Vấn đề:**
+
 - `memcpy()` sử dụng `dh_param_len` để copy dữ liệu
 - Không kiểm tra độ dài thực tế của `data` (`len` parameter)
 - Nếu `data` ngắn hơn `dh_param_len`, sẽ gây **Buffer Overflow** → Ghi đè memory
@@ -124,6 +125,7 @@ void blufi_dh_negotiate_data_handler(uint8_t *data, int len, ...)
 ```
 
 **Vấn đề:**
+
 - Hàm nhận `len` nhưng không sử dụng để validate
 - Không đảm bảo `data` có đủ dữ liệu trước khi xử lý
 
@@ -134,15 +136,18 @@ void blufi_dh_negotiate_data_handler(uint8_t *data, int len, ...)
 ### 1. **Memory Exhaustion Attack**
 
 **Cách thực hiện:**
+
 - Gửi `SEC_TYPE_DH_PARAM_LEN` với `dh_param_len = 65535` (hoặc giá trị lớn bất kỳ)
 - ESP32 sẽ cố gắng `malloc(65535)` → Hết bộ nhớ → Panic → Reboot
 
 **Tác động:**
+
 - ✅ DoS (Denial of Service) - Chắc chắn
 - ESP32 crash và reboot liên tục
 - Mất kết nối WiFi/BLE
 
 **Ví dụ:**
+
 ```
 Payload: [0x00, 0xFF, 0xFF]  // SEC_TYPE_DH_PARAM_LEN với length = 65535
 Kết quả: malloc(65535) → Hết bộ nhớ → Panic → Reboot
@@ -151,16 +156,19 @@ Kết quả: malloc(65535) → Hết bộ nhớ → Panic → Reboot
 ### 2. **Buffer Overflow Attack**
 
 **Cách thực hiện:**
+
 1. Gửi `SEC_TYPE_DH_PARAM_LEN` với `dh_param_len = 1024`
 2. Gửi `SEC_TYPE_DH_PARAM_DATA` với `data` chỉ có 10 bytes
 3. `memcpy()` sẽ copy 1024 bytes từ buffer 10 bytes → Buffer overflow
 
 **Tác động:**
+
 - ✅ Buffer Overflow - Ghi đè memory
 - ✅ DoS - Crash ngay lập tức
 - ⚠️ RCE (Remote Code Execution) - Tiềm ẩn (phụ thuộc compiler protections)
 
 **Ví dụ:**
+
 ```
 Bước 1: [0x00, 0x04, 0x00]  // dh_param_len = 1024
 Bước 2: [0x01, 0x41, 0x41, ...]  // 10 bytes data, nhưng memcpy copy 1024 bytes
@@ -170,10 +178,12 @@ Kết quả: Buffer overflow → Ghi đè memory → Crash
 ### 3. **Heap Corruption Attack**
 
 **Cách thực hiện:**
+
 - Kết hợp cả hai kiểu tấn công trên
 - Gây heap corruption bằng cách ghi đè các cấu trúc heap
 
 **Tác động:**
+
 - ✅ Heap Corruption
 - ✅ Crash sau một khoảng thời gian
 - ⚠️ RCE - Tiềm ẩn (phụ thuộc heap layout)
@@ -187,6 +197,7 @@ Kết quả: Buffer overflow → Ghi đè memory → Crash
 **Vị trí:** `main/blufi_security.c` - Dòng 78-89
 
 **Code trước khi sửa:**
+
 ```c
 case SEC_TYPE_DH_PARAM_LEN:
     blufi_sec->dh_param_len = ((data[1]<<8)|data[2]);
@@ -195,6 +206,7 @@ case SEC_TYPE_DH_PARAM_LEN:
 ```
 
 **Code sau khi sửa:**
+
 ```c
 #define MAX_DH_PARAM_LEN 512  // Giới hạn hợp lý cho DH parameters
 
@@ -205,21 +217,21 @@ case SEC_TYPE_DH_PARAM_LEN:
         btc_blufi_report_error(ESP_BLUFI_DH_PARAM_ERROR);
         return;
     }
-    
+
     blufi_sec->dh_param_len = ((data[1]<<8)|data[2]);
-    
+
     // Kiểm tra giới hạn
     if (blufi_sec->dh_param_len <= 0 || blufi_sec->dh_param_len > MAX_DH_PARAM_LEN) {
         BLUFI_ERROR("Invalid dh_param_len: %d (max: %d)\n", blufi_sec->dh_param_len, MAX_DH_PARAM_LEN);
         btc_blufi_report_error(ESP_BLUFI_DH_PARAM_ERROR);
         return;
     }
-    
+
     if (blufi_sec->dh_param) {
         free(blufi_sec->dh_param);
         blufi_sec->dh_param = NULL;
     }
-    
+
     blufi_sec->dh_param = (uint8_t *)malloc(blufi_sec->dh_param_len);
     if (blufi_sec->dh_param == NULL) {
         btc_blufi_report_error(ESP_BLUFI_DH_MALLOC_ERROR);
@@ -233,6 +245,7 @@ case SEC_TYPE_DH_PARAM_LEN:
 **Vị trí:** `main/blufi_security.c` - Dòng 91-98
 
 **Code trước khi sửa:**
+
 ```c
 case SEC_TYPE_DH_PARAM_DATA:{
     // ...
@@ -240,6 +253,7 @@ case SEC_TYPE_DH_PARAM_DATA:{
 ```
 
 **Code sau khi sửa:**
+
 ```c
 case SEC_TYPE_DH_PARAM_DATA:{
     if (blufi_sec->dh_param == NULL) {
@@ -247,15 +261,15 @@ case SEC_TYPE_DH_PARAM_DATA:{
         btc_blufi_report_error(ESP_BLUFI_DH_PARAM_ERROR);
         return;
     }
-    
+
     // ⭐ QUAN TRỌNG: Kiểm tra độ dài thực tế của data
     if (len < blufi_sec->dh_param_len + 1) {
-        BLUFI_ERROR("Invalid data length: %d < %d (dh_param_len + 1)\n", 
+        BLUFI_ERROR("Invalid data length: %d < %d (dh_param_len + 1)\n",
                    len, blufi_sec->dh_param_len + 1);
         btc_blufi_report_error(ESP_BLUFI_DH_PARAM_ERROR);
         return;
     }
-    
+
     uint8_t *param = blufi_sec->dh_param;
     memcpy(blufi_sec->dh_param, &data[1], blufi_sec->dh_param_len);
     // ...
@@ -266,6 +280,7 @@ case SEC_TYPE_DH_PARAM_DATA:{
 **Vị trí:** `main/blufi_security.c` - Đầu hàm `blufi_dh_negotiate_data_handler()`
 
 **Code thêm:**
+
 ```c
 void blufi_dh_negotiate_data_handler(uint8_t *data, int len, uint8_t **output_data, int *output_len, bool *need_free)
 {
@@ -275,16 +290,17 @@ void blufi_dh_negotiate_data_handler(uint8_t *data, int len, uint8_t **output_da
         btc_blufi_report_error(ESP_BLUFI_DH_PARAM_ERROR);
         return;
     }
-    
+
     int ret;
     uint8_t type = data[0];
-    
+
     // ...
 ```
 
 ### 4. **Sử dụng `memcpy_s()` hoặc `strncpy_s()` (Nếu có)**
 
 **Code khuyến nghị:**
+
 ```c
 // Thay vì memcpy() không an toàn
 // memcpy(blufi_sec->dh_param, &data[1], blufi_sec->dh_param_len);
@@ -312,16 +328,19 @@ if (copy_len < blufi_sec->dh_param_len) {
 ### Các Bước
 
 1. **Thiết lập target:**
+
 ```bash
 idf.py set-target esp32s3  # hoặc esp32, esp32c3
 ```
 
 2. **Build:**
+
 ```bash
 idf.py build
 ```
 
 3. **Flash và Monitor:**
+
 ```bash
 idf.py -p COM3 flash monitor  # Windows
 idf.py -p /dev/ttyUSB0 flash monitor  # Linux/Mac
@@ -338,6 +357,7 @@ idf.py -p /dev/ttyUSB0 flash monitor  # Linux/Mac
 - Tuân thủ pháp luật về an ninh mạng
 
 **Lưu ý:**
+
 - Lỗ hổng này có thể gây crash/reboot ESP32
 - Không có thiệt hại phần cứng vĩnh viễn
 - Reset ESP32 để phục hồi

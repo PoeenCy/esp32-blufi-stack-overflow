@@ -1,5 +1,4 @@
-<!-- filepath: d:\esp32-blufi-stack-overflow\README.md -->
-# ESP32-BLUFI-DH-OVERFLOW: PHÂN TÍCH VÀ KHAI THÁC LỖ HỔNG TRÀN BỘ ĐỆM (WXR) TRÊN GIAO THỨC BLUFI
+# ESP32-BLUFI-STACK-OVERFLOW: PHÂN TÍCH VÀ KHAI THÁC LỖ HỔNG TRÀN BỘ ĐỆM (WXR) TRÊN GIAO THỨC BLUFI
 
 ## 1. Giới thiệu Đồ án
 

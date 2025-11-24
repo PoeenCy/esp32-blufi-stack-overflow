@@ -103,7 +103,7 @@ Thí nghiệm được thực hiện trên phiên bản firmware **ESP-IDF v5.0.
 
 ## ⚠️ Tuyên bố Trách nhiệm
 
-Dự án này được cung cấp **"AS IS"** cho mục đích **giáo dục và nghiên cứu chỉ dành cho các chuyên gia bảo mật**. 
+Dự án này chỉ dùng cho mục đích **giáo dục và nghiên cứu về bảo mật**. 
 
 **Người sử dụng chịu trách nhiệm hoàn toàn về:**
 - ✅ Việc lấy phép từ chủ sở hữu thiết bị trước khi kiểm thử

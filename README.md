@@ -87,7 +87,7 @@ Thí nghiệm được thực hiện trên phiên bản firmware **ESP-IDF v5.0.
 
 | Thông tin | Chi tiết |
 |-----------|---------|
-| **Tác giả** | 👨‍💼 Trần Thanh Nhã, 👨‍💼 Trần Hữu Nhan |
+| **Tác giả** | 👨‍💼 Trần Thanh Nhã, 👨‍💼 Trần Hữu Nhân |
 | **Loại Đồ án** | 🔒 Đồ án môn học Bảo mật mạng |
 | **Mục đích** | 📚 Giáo dục & Nghiên cứu |
 | **Năm thực hiện** | 2025 |

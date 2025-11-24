@@ -3,14 +3,14 @@
 
 ## 1. Giới thiệu Đồ án
 
-Đồ án này là một nghiên cứu chuyên sâu về an toàn thông tin hệ thống nhúng, tập trung vào việc phân tích và tái hiện lỗ hổng tràn bộ đệm (\textbf{Buffer Overflow}) nghiêm trọng trong giao thức cấu hình không dây BluFi của Espressif Systems.
+Đồ án này là một nghiên cứu chuyên sâu về an toàn thông tin hệ thống nhúng, tập trung vào việc phân tích và tái hiện lỗ hổng tràn bộ đệm nghiêm trọng trong giao thức cấu hình không dây BluFi của Espressif Systems.
 
 Lỗ hổng này, được định danh là **NCC-BluFi-Ref-WXR**, tồn tại trong mã nguồn tham chiếu của ESP-IDF (phiên bản v5.0.7 trở về trước) và cho phép một kẻ tấn công trong phạm vi Bluetooth Low Energy (BLE) thực hiện các cuộc tấn công Từ chối Dịch vụ (DoS) hoặc tiềm ẩn nguy cơ Thực thi Mã từ xa (RCE) mà không cần xác thực.
 
 Mục tiêu của Đồ án là:
 1.  Tái hiện thành công kịch bản tấn công trên phần cứng ESP32 thực tế.
-2.  Phân tích nguyên nhân gốc rễ (\textit{Root Cause}) ở mức mã nguồn C.
-3.  Đề xuất và kiểm chứng một bản vá lỗi tối ưu (\textit{Secure Patch}) dựa trên nguyên tắc Quản lý Khối Bộ nhớ Thô (\textit{Raw Memory Block Management}).
+2.  Phân tích nguyên nhân gốc rễ ở mức mã nguồn C.
+3.  Đề xuất và kiểm chứng một bản vá lỗi tối ưu dựa trên nguyên tắc Quản lý Khối Bộ nhớ Thô.
 
 ## 2. Mô tả Kỹ thuật Lỗ hổng (NCC-BluFi-Ref-WXR)
 
@@ -91,12 +91,12 @@ Thí nghiệm được thực hiện trên phiên bản firmware **ESP-IDF v5.0.
 | **Tác giả** | 👨‍💼 Trần Thanh Nhã, 👨‍💼 Trần Hữu Nhan |
 | **Loại Đồ án** | 🔒 Đồ án môn học Bảo mật mạng |
 | **Mục đích** | 📚 Giáo dục & Nghiên cứu |
-| **Năm thực hiện** | 2024-2025 |
+| **Năm thực hiện** | 2025 |
 
-### 🛡️ Copyright © 2024-2025
+### 🛡️ Copyright © 2025
 **Được thực hiện bởi:**
-- 👤 **Trần Thanh Nhã** - Phân tích kỹ thuật & Viết tài liệu
-- 👤 **Trần Hữu Nhan** - Phát triển PoC & Kiểm thử
+- 👤 **Trần Thanh Nhã**
+- 👤 **Trần Hữu Nhân** 
 
 *Tất cả quyền được bảo vệ. Dự án này được chia sẻ với mục đích giáo dục và nghiên cứu an toàn thông tin.*
 

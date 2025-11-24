@@ -17,13 +17,13 @@ Mục tiêu của Đồ án là:
 | :--- | :--- |
 | **Giao thức bị ảnh hưởng** | BluFi (Bluetooth Wi-Fi Provisioning) |
 | **Bản chất** | Buffer Overflow (Global/Heap-based) |
-| **Nguyên nhân gốc** | Lỗi logic khi xử lý sự kiện \texttt{ESP\_BLUFI\_EVENT\_RECV\_STA\_SSID} và \texttt{ESP\_BLUFI\_EVENT\_RECV\_STA\_PASSWD}. Cụ thể, hàm \texttt{strncpy} được gọi với tham số độ dài lấy trực tiếp từ dữ liệu đầu vào (\texttt{param->sta\_ssid.ssid\_len}) thay vì kích thước an toàn của bộ đệm đích (\texttt{sizeof(sta\_config.sta.ssid)}). |
-| **Tác động** | Ghi đè lên bộ nhớ cấu hình (ví dụ: \texttt{authmode threshold}), phá hủy Heap Metadata, gây \textbf{Từ chối Dịch vụ (DoS)} hoặc \textbf{Thực thi Mã từ xa (RCE)}. |
+| **Nguyên nhân gốc** | Lỗi logic khi xử lý sự kiện `ESP\_BLUFI\_EVENT\_RECV\_STA\_SSID` và `ESP\_BLUFI\_EVENT\_RECV\_STA\_PASSWD` Cụ thể, hàm `strncpy` được gọi với tham số độ dài lấy trực tiếp từ dữ liệu đầu vào `param->sta\_ssid.ssid\_len`) thay vì kích thước an toàn của bộ đệm đích `sizeof(sta\_config.sta.ssid)`). |
+| **Tác động** | Ghi đè lên bộ nhớ cấu hình, phá hủy Heap Metadata, gây `Từ chối Dịch vụ (DoS)` hoặc `Thực thi Mã từ xa (RCE)`. |
 | **Yêu cầu tấn công** | Kẻ tấn công phải ở trong phạm vi sóng BLE (khoảng 10-30m) và không cần xác thực (Unauthenticated Pairing). |
 
 ## 3. Cấu trúc Thư mục Đồ án
 
-Cấu trúc thư mục được tổ chức theo tiêu chuẩn của ESP-IDF và bổ sung thêm thư mục \texttt{attack} để chứa các công cụ PoC (Proof-of-Concept).
+Cấu trúc thư mục được tổ chức theo tiêu chuẩn của ESP-IDF và bổ sung thêm thư mục `attack` để chứa các công cụ PoC (Proof-of-Concept).
 
 ```
 esp32-blufi-dh-overflow/
@@ -57,9 +57,9 @@ Thí nghiệm được thực hiện trên phiên bản firmware **ESP-IDF v5.0.
 ### 4.2. Khai thác Lỗ hổng WXR (DoS/RCE)
 
 1.  **Biên dịch và Nạp Firmware Lỗi:**
-    *   Sử dụng ESP-IDF v5.0.7 để biên dịch và nạp firmware từ thư mục \texttt{main/} lên ESP32.
+    *   Sử dụng ESP-IDF v5.0.7 để biên dịch và nạp firmware từ thư mục `main/` lên ESP32.
 2.  **Giám sát Log:**
-    *   Mở Serial Monitor (ví dụ: PuTTY hoặc \texttt{idf.py monitor}) để giám sát log của ESP32.
+    *   Mở Serial Monitor (ví dụ: PuTTY hoặc `idf.py monitor`) để giám sát log của ESP32.
 3.  **Thực thi Tấn công:**
     *   Chạy script tấn công:
         ```bash
@@ -68,18 +68,18 @@ Thí nghiệm được thực hiện trên phiên bản firmware **ESP-IDF v5.0.
     *   Script sẽ tự động quét, kết nối và gửi Payload tràn bộ đệm.
 4.  **Quan sát Kết quả:**
     *   Log Serial của ESP32 sẽ hiển thị các thông báo lỗi:
-        *   \texttt{wifi:Config authmode threshold is invalid, 1094795585}
-        *   \texttt{assert failed: heap\_caps\_free...}
-        *   \texttt{Backtrace: 0x400...} (CPU Panic / Guru Meditation Error).
+        *   `wifi:Config authmode threshold is invalid, 1094795585`
+        *   `assert failed: heap\_caps\_free...`
+        *   `Backtrace: 0x400...` (CPU Panic / Guru Meditation Error).
     *   Thiết bị sẽ tự động khởi động lại, chứng minh cuộc tấn công DoS thành công.
 
 ## 5. Áp dụng Bản vá Tối ưu (Secure Patch)
 
 Để sửa lỗi triệt để, nhóm khuyến nghị áp dụng mô hình quản lý bộ nhớ thô.
 
-**Hành động:** Thay thế logic xử lý trong \texttt{case ESP\_BLUFI\_EVENT\_RECV\_STA\_SSID} và các case tương tự bằng hàm Wrapper an toàn, đảm bảo \texttt{memset} (vệ sinh), \texttt{memcpy} (sao chép an toàn) và gán \texttt{'\textbackslash0'} thủ công.
+**Hành động:** Thay thế logic xử lý trong `case ESP\_BLUFI\_EVENT\_RECV\_STA\_SSID` và các case tương tự bằng hàm Wrapper an toàn, đảm bảo `memset` (vệ sinh), `memcpy` (sao chép an toàn) và gán `\0` thủ công.
 
-**Lợi ích của Bản vá Tối ưu:** Ngăn chặn tuyệt đối \textit{Buffer Overflow} và \textit{Buffer Over-read} mà vẫn đảm bảo tính đúng đắn của dữ liệu.
+**Lợi ích của Bản vá Tối ưu:** Ngăn chặn tuyệt đối `Buffer Overflow` và `Buffer Over-read` mà vẫn đảm bảo tính đúng đắn của dữ liệu.
 
 ---
 
